@@ -1,0 +1,15 @@
+Bitcoinnota 1​ (símbolo:  o ₿; código: BTC) es una moneda digital descentralizada y un sistema de pago3​4​ sin banco central o administrador único.5​6​
+
+Bitcoin core
+Parte de moneda de curso legal e inversión
+
+
+Bitcoin Core
+Información general
+Tipo de programa	Dinero electrónico
+Autor	Satoshi Nakamoto (seudónimo)
+Desarrollador	Satoshi Nakamoto (seudónimo), Gavin Andresen y otros
+Lanzamiento inicial	3 de enero de 2009 (14 años)
+Licencia	MIT License
+Estado actual	Activo
+Idiomas	Multilingüe
