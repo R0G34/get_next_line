@@ -1,5 +1,13 @@
 #include "get_next_line.h"
 
+char	*ft_free(char **x)
+{
+	if (x && *x)
+		free (*x);
+	*x = NULL;
+	return (NULL);
+}
+
 static char	*ft_read(int fd, char *buffer)
 {
 	char	*readd;
@@ -7,20 +15,20 @@ static char	*ft_read(int fd, char *buffer)
 
 	readd = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!readd)
-		return (free(buffer), NULL);
+		return (ft_free(&buffer), NULL);
 	while (!ft_strchr(buffer, '\n'))
 	{
 		str = read(fd, readd, BUFFER_SIZE);
 		if (str == -1)
-			return (free(readd), free(buffer), NULL);
+			return (ft_free(&readd), ft_free(&buffer), NULL);
 		readd[str] = '\0';
 		if (readd[0] == '\0')
-			return (free(readd), buffer);
+			return (ft_free(&readd), buffer);
 		buffer = ft_strjoin(buffer, readd);
 		if (!buffer)
-			return (free(readd), free(buffer), NULL);
+			return (ft_free(&readd), ft_free(&buffer), NULL);
 	}
-	free(readd);
+	ft_free(&readd);
 	return (buffer);
 }
 
@@ -41,7 +49,7 @@ static char	*delete(char *buffer)
 	result = (char *)malloc((len_limit(buffer, '\0') - i + 1) \
 	* sizeof(char));
 	if (!result)
-		return (free(buffer), NULL);
+		return (ft_free(&buffer), NULL);
 	while (buffer[i] != '\0')
 	{
 		result[j] = buffer[i];
@@ -49,7 +57,7 @@ static char	*delete(char *buffer)
 		j++;
 	}
 	result[j] = '\0';
-	free(buffer);
+	ft_free(&buffer);
 	return (result);
 }
 
@@ -74,7 +82,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buffer = delete(buffer);
 	if (buffer[0] == '\0')
-		free(buffer);
+		ft_free(&buffer);
 	return (line);
 }
 
@@ -87,7 +95,7 @@ int	main()
 	fd = open("test.txt", O_RDONLY);
 	lines = "";
 	i = 1;
-	while (lines)
+	while (lines != '\0')
 	{
 		lines = get_next_line(fd);
 		if (lines != NULL)
@@ -96,6 +104,6 @@ int	main()
 		free(lines);
 	}
 	printf("\n");
-	system("leaks -q a.exe");
+	/*system("leaks -q a.exe");*/
 	return (0);
 }
